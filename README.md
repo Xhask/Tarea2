@@ -1,33 +1,21 @@
-En este *repl* puedes encontrar varios ejemplos que te pueden ayudar con las tareas de estructura.
+En este codigo se hizo una lista con la base de datos de muchas peliculas, con la finalidad de poder buscarlas y conocer su información segun diversos topicos
 
-## Código de Ejemplo (tarea1)
-Para ejecutar el ejemplo tarea1 primero debemos compilar (en la carpeta raíz)
+## Menu de peliculas (Tarea 2)
+Para ejecutar el menu, primero debemos debemos compilar (en la carpeta raíz)
 ````
-gcc tdas/*.c tarea1.c -Wno-unused-result -o tarea1
+gcc tdas/*.c tarea2.c -Wno-unused-result -o tarea2
 ````
 
 Y luego ejecutar:
 ````
-./tarea1
+./tarea2
 ````
 
-## TDAs
-En la carpeta `tdas` se encuentran implementados distintos TDAs que puedes utilizar (lista, pila, cola, cola con prioridad y mapas). 
+## Peliculas
+En el menu aparecerá la base de datos de varias peliculas, para comenzar primero debemos cargar todas las peliculas, para esto hay que apretar la opcion 1 al iniciar el programa
 
-Las implementaciones no son las más eficientes (todas usan como estructura de datos una **lista enlazada**), por lo que puedes reemplazarlas por las que has realizado en los labs.
+## Consideraciones
+Para el correcto funcionamiento de la busqueda, debes respetar las mayusculas y espacios de forma correcta (Mayuscula al iniciar un nombre, y al ingresar el genero)
 
-## Otros códigos (en carpeta examples)
-Para ejecutar los distintos ejemplos que hay en la carpeta `examples`, primero debes compilarlos. Si estamos en la carpeta raíz:
-````
-gcc tdas/*.c examples/example2_menu.c -Wno-unused-result -o example
-````
-Y luego ejecutarlos:
-````
-./example
-````
+Opcion buscar por rango de calificaciones actualmente no funcional!
 
-Se incluyen los siguientes ejemplos:
-* `example1_list`: Uso del TDA Lista, inserción y eliminación de elementos.
-* `example2_menu`: Ejemplo de menú con submenús.
-* `example3_readcsv`: Ejemplo de lectura desde un archivo csv y almacenamiento en datos estructurados.
-* `example4_map`: Ejemplo de uso del TDA mapa.
