@@ -12,7 +12,8 @@ Y luego ejecutar:
 ````
 
 ## Peliculas
-En el menu aparecerá la base de datos de varias peliculas, para comenzar primero debemos cargar todas las peliculas, para esto hay que apretar la opcion 1 al iniciar el programa
+En el menu aparecerá la base de datos de varias peliculas, para comenzar lo primero que debemos hacer es cargar todas las peliculas, para esto hay que apretar la opcion 1 al iniciar el programa
+
 
 ## Consideraciones
 Para el correcto funcionamiento de la busqueda, debes respetar las mayusculas y espacios de forma correcta (Mayuscula al iniciar un nombre, y al ingresar el genero)

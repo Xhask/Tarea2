@@ -136,7 +136,6 @@ void buscar_por_id(Map *pelis_byid) {
 
 void buscar_por_genero(Map *pelis_byid) {
     char genero[100]; // Buffer para almacenar el género ingresado por el usuario
-    int found = 0;    // Variable para rastrear si se encontraron películas del género ingresado
 
     // Solicita al usuario el género de la película
     printf("Ingrese el género de la película: ");
@@ -144,6 +143,8 @@ void buscar_por_genero(Map *pelis_byid) {
 
     // Itera sobre el mapa para buscar películas por género
     MapPair *pair = map_first(pelis_byid);
+    int found = 0; // Variable para rastrear si se encontraron películas del género ingresado
+
     while (pair != NULL) {
         Film *peli = pair->value;
         // Itera sobre la lista de géneros de la película
@@ -151,15 +152,15 @@ void buscar_por_genero(Map *pelis_byid) {
         while (current != NULL) {
             char *genre = (char *)current->data;
 
-            // Compara el género actual con el género proporcionado por el usuario
-            if (strcmp(genre, genero) == 0) {
+            // Compara el género actual de la película con el género proporcionado por el usuario
+            if (strncmp(genre, genero, strlen(genero) - 1) == 0) {
                 // Si el género coincide, muestra la información de la película
                 printf("ID: %s, Título: %s, Director: %s, Año: %d\n", peli->id, peli->title,
                        peli->director, peli->year);
                 found = 1; // Establece found a 1 si se encuentra una película del género
                 break; // Sal del bucle interno si se encuentra el género
             }
-            current = current->next; // Avanza al siguiente género en la lista
+            current = current->next; // Avanza al siguiente género en la lista de la película
         }
         pair = map_next(pelis_byid); // Avanza al siguiente par en el mapa
     }
