@@ -16,7 +16,6 @@ En el menu aparecerá la base de datos de varias peliculas, para comenzar lo pri
 
 
 ## Consideraciones
-Para el correcto funcionamiento de la busqueda, debes respetar las mayusculas y espacios de forma correcta (Mayuscula al iniciar un nombre, y al ingresar el genero)
-
+No hay problemas en el uso de mayusculas/minusculas al buscar, el sistema reconocerá y buscará lo pedido independientemente de estas
 Opcion buscar por rango de calificaciones actualmente no funcional!
 

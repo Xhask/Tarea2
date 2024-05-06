@@ -94,15 +94,26 @@ void cargar_peliculas(Map *pelis_byid) {
     // Divide los géneros separados por comas y los agrega a la lista de géneros
     char *token = strtok(campos[9], ",");
     while (token != NULL) {
-      list_pushBack(peli->genres, token);
-      token = strtok(NULL, ",");
+        // Elimina las comillas al principio y al final de cada género
+        char *genre = strdup(token);
+        genre[strlen(genre) - 1] = '\0'; // Elimina la comilla al final
+        memmove(genre, genre + 1, strlen(genre) - 1); // Elimina la comilla al principio
+
+        // Copia el género en un nuevo espacio de memoria para evitar problemas de punteros
+        char *genre_copy = malloc(strlen(genre) + 1);
+        strcpy(genre_copy, genre); // Copia el género sin las comillas
+
+        list_pushBack(peli->genres, genre_copy);
+        token = strtok(NULL, ",");
     }
 
     // Inserta la película en el mapa usando el ID como clave
     map_insert(pelis_byid, peli->id, peli);
   }
+  
   fclose(archivo); // Cierra el archivo después de leer todas las líneas
 }
+
 
 /**
  * Busca y muestra la información de películas por id en un mapa.
@@ -153,7 +164,7 @@ void buscar_por_genero(Map *pelis_byid) {
             char *genre = (char *)current->data;
 
             // Compara el género actual de la película con el género proporcionado por el usuario
-            if (strncmp(genre, genero, strlen(genero) - 1) == 0) {
+            if (strcmp(genre, genero) == 0) {
                 // Si el género coincide, muestra la información de la película
                 printf("ID: %s, Título: %s, Director: %s, Año: %d\n", peli->id, peli->title,
                        peli->director, peli->year);
@@ -171,6 +182,7 @@ void buscar_por_genero(Map *pelis_byid) {
     }
 }
 
+
 /**
  * Busca y muestra la información de películas por director en un mapa.
  */
@@ -181,21 +193,34 @@ void buscar_por_director(Map *pelis_byid) {
     printf("Ingrese el nombre del director: ");
     scanf(" %[^\n]", director);
 
+    // Convierte el nombre del director ingresado por el usuario a minúsculas
+    for (int i = 0; director[i]; i++) {
+        director[i] = tolower(director[i]);
+    }
+
     // Itera sobre el mapa para buscar y mostrar películas del director ingresado
     MapPair *pair = map_first(pelis_byid);
     int found = 0; // Variable para rastrear si se encontró alguna película del director
     while (pair != NULL) {
         Film *peli = pair->value;
-        // Compara el nombre del director de la película actual con el nombre ingresado por el usuario
-        if (is_equal_str(peli->director, director)) {
+        // Convierte el nombre del director almacenado en la estructura de película a minúsculas
+        char director_lower[300];
+        strcpy(director_lower, peli->director);
+        for (int i = 0; director_lower[i]; i++) {
+            director_lower[i] = tolower(director_lower[i]);
+        }
+        // Compara el nombre del director de la película actual con el nombre ingresado por el usuario (en minúsculas)
+        if (strcmp(director_lower, director) == 0) {
             // Si el director coincide, muestra la información de la película
             printf("ID: %s, Título: %s, Año: %d\n", peli->id, peli->title, peli->year);
             // Muestra los géneros de la película iterando sobre la lista de géneros
             Node *current_genre = peli->genres->head;
+            printf("Géneros: ");
             while (current_genre != NULL) {
-                printf("Género: %s\n", (char *)current_genre->data);
+                printf("%s, ", (char *)current_genre->data);
                 current_genre = current_genre->next;
             }
+            printf("\n");
             found = 1; // Indica que se encontró al menos una película del director
         }
         pair = map_next(pelis_byid); // Avanza al siguiente par en el mapa
