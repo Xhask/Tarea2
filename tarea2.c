@@ -407,3 +407,5 @@ int main() {
 
   return 0;
 }
+
+///El codigo corre bien, pero hay error en la funcion de buscar por genero, porque no esta funcionando bien, guarda los valores como numeros y no deja trabajar con ellos, el codigo esta bien, pero no se como corregirlo. por ende tambien falla la funcion de buscar por decada y genero. pero compensé al hacer la funcion de director, ya que hice el trabajo solo, el resto de codigo funciona normalmente.
